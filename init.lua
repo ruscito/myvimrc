@@ -151,6 +151,12 @@ vim.keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" })
 vim.keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" })
 vim.keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current baffer in new tab" })
 
+-- Window move
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to window below" })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to window above" })
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to window left" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to window right" })
+
 -- terminal
 local term_win = nil
 local original_win = nil
@@ -183,6 +189,18 @@ vim.keymap.set("t", "<C-q>", function()
     end
 end, { noremap = true, silent = true })
 
+-- Toggle editor/.terminal
+vim.keymap.set("n", "<leader>tt", function()
+    if vim.bo.buftype == "terminal" then
+        vim.cmd.wincmd("p")  -- Go to previous window
+    else
+        if term_win and vim.api.nvim_win_is_valid(term_win) then
+            vim.api.nvim_set_current_win(term_win)
+        else
+            vim.notify("No terminal window found")
+        end
+    end
+end, { desc = "Toggle between terminal and editor" })
 
 local job_id = 0
 vim.keymap.set("n", "<leader>st", function()
