@@ -40,6 +40,17 @@ This configuration enhances Neovim with productivity-focused keybinds, plugins, 
 
 ---
 
+## Window Move Management
+
+| Keybind          | Action                                  |
+|------------------|-----------------------------------------|
+| `Ctrl+j`         | Switch to window down                   |
+| `Ctrl+k`         | Switch to window up                     |
+| `Ctrl+h`         | Switch to window left                   |
+| `Ctrl+l`         | Switch to windoq right                  |
+
+---
+
 ## Tab Management
 
 | Keybind          | Action                                  |
@@ -57,6 +68,7 @@ This configuration enhances Neovim with productivity-focused keybinds, plugins, 
 | Keybind          | Action                                  |
 |------------------|-----------------------------------------|
 | `<Leader>st`     | Toggle terminal (bottom split)          |
+| `<leader>tt`     | Toggle between terminal & editor        |
 | `Ctrl+q` (Term)  | Exit terminal and return to last window |
 
 ---
