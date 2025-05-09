@@ -100,6 +100,93 @@ require("lazy").setup({
 -- Set colorscheme
 -- vim.cmd.colorscheme("onedark")
 vim.cmd.colorscheme("melange")
+--[[
+-- Base editor colors
+vim.cmd("hi Normal       ctermfg=252 ctermbg=237 guifg=#d0d0d0 guibg=#3a3a3a")
+vim.cmd("hi LineNr       ctermfg=243 ctermbg=237 guifg=#767676 guibg=#3a3a3a")
+vim.cmd("hi CursorLineNr ctermfg=214 ctermbg=238 guifg=#ffaf00 guibg=#444444 cterm=bold gui=bold")
+vim.cmd("hi NonText      ctermfg=240 ctermbg=237 guifg=#585858 guibg=#3a3a3a")
+vim.cmd("hi SpecialKey   ctermfg=240 ctermbg=237 guifg=#585858 guibg=#3a3a3a")
+
+-- Status line and splits
+vim.cmd("hi StatusLine   ctermfg=252 ctermbg=236 guifg=#d0d0d0 guibg=#303030")
+vim.cmd("hi StatusLineNC ctermfg=246 ctermbg=236 guifg=#949494 guibg=#303030")
+vim.cmd("hi VertSplit    ctermfg=236 ctermbg=236 guifg=#303030 guibg=#303030")
+
+-- Tab line
+vim.cmd("hi TabLine      ctermfg=246 ctermbg=236 guifg=#949494 guibg=#303030")
+vim.cmd("hi TabLineFill  ctermfg=246 ctermbg=236 guifg=#949494 guibg=#303030")
+vim.cmd("hi TabLineSel   ctermfg=252 ctermbg=238 guifg=#d0d0d0 guibg=#444444")
+
+-- Popup menu
+vim.cmd("hi Pmenu        ctermfg=252 ctermbg=236 guifg=#d0d0d0 guibg=#303030")
+vim.cmd("hi PmenuSel     ctermfg=0   ctermbg=214 guifg=#000000 guibg=#ffaf00")
+vim.cmd("hi PmenuSbar    ctermbg=236 guibg=#303030")
+vim.cmd("hi PmenuThumb   ctermbg=240 guibg=#585858")
+
+-- Cursor and current line highlight
+vim.cmd("hi Cursor       guifg=#000000 guibg=#ffaf00")
+vim.cmd("hi CursorLine   ctermbg=238 guibg=#444444 cterm=none gui=none")
+vim.cmd("hi CursorColumn ctermbg=238 guibg=#444444")
+vim.cmd("hi ColorColumn  ctermbg=238 guibg=#444444")
+
+-- Fold columns
+vim.cmd("hi Folded       ctermfg=246 ctermbg=238 guifg=#949494 guibg=#444444")
+vim.cmd("hi FoldColumn   ctermfg=246 ctermbg=237 guifg=#949494 guibg=#3a3a3a")
+
+-- Diff mode
+vim.cmd("hi DiffAdd      ctermfg=0   ctermbg=114 guifg=#000000 guibg=#87d787")
+vim.cmd("hi DiffChange   ctermfg=0   ctermbg=186 guifg=#000000 guibg=#d7d787")
+vim.cmd("hi DiffDelete   ctermfg=0   ctermbg=174 guifg=#000000 guibg=#d78787")
+vim.cmd("hi DiffText     ctermfg=0   ctermbg=214 guifg=#000000 guibg=#ffaf00")
+
+-- Selection and search
+vim.cmd("hi Visual       ctermfg=235 ctermbg=186 guifg=#262626 guibg=#d7d787")
+vim.cmd("hi Search       ctermfg=0   ctermbg=214 guifg=#000000 guibg=#ffaf00")
+vim.cmd("hi MatchParen   ctermfg=0   ctermbg=214 guifg=#000000 guibg=#ffaf00")
+vim.cmd("hi Todo         ctermfg=0   ctermbg=184 guifg=#000000 guibg=#d7d700")
+
+-- Syntax highlighting
+vim.cmd("hi Comment      ctermfg=246 guifg=#949494")
+vim.cmd("hi Statement    ctermfg=214 guifg=#ffaf00")
+vim.cmd("hi Type         ctermfg=214 guifg=#ffaf00")
+vim.cmd("hi cOperator    ctermfg=214 guifg=#ffaf00")
+vim.cmd("hi Identifier   ctermfg=146 guifg=#afafd7")
+vim.cmd("hi PreProc      ctermfg=81  guifg=#5fd7ff")
+vim.cmd("hi Constant     ctermfg=174 guifg=#d78787")
+vim.cmd("hi Special      ctermfg=174 guifg=#d78787")
+vim.cmd("hi String       ctermfg=186 guifg=#d7d787")
+vim.cmd("hi cStructure   ctermfg=186 guifg=#d7d787")
+vim.cmd("hi cFunction    ctermfg=114 guifg=#87d787")
+vim.cmd("hi cCustomFunc  ctermfg=114 guifg=#87d787")-- Highlight groups for the status line
+vim.api.nvim_set_hl(0, "StatusLine", {
+  ctermfg = 234, ctermbg = 214,
+  fg = "#1c1c1c", bg = "#ffaf00"
+})
+
+vim.api.nvim_set_hl(0, "StatusLineNC", {
+  ctermfg = 234, ctermbg = 180,
+  fg = "#1c1c1c", bg = "#d7af87"
+})
+
+-- Custom status line
+vim.opt.statusline = table.concat({
+  "%#StatusLine#",  -- Use StatusLine highlight group
+  " %f",            -- File name
+  "%m",             -- Modified flag
+  "%r",             -- Read-only flag
+  "%h",             -- Help buffer flag
+  "%w",             -- Preview window flag
+  "%=",             -- Right-align the rest
+  "%y ",            -- File type
+  "%{&fileencoding !=# '' ? &fileencoding : &encoding} ",  -- Encoding
+  "%{&fileformat} ",  -- File format
+  "%l:%c ",         -- Line and column
+  "%p%%"            -- Percentage through file
+})
+
+
+--]]
 
 -- Basic key mappings
 vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { silent = true })
