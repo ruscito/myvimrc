@@ -59,10 +59,18 @@ set colorcolumn=80            " Show column at 80 characters
 set list                      " Show invisible characters
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Display tab characters and trailing spaces
 
-" Custom C/C++ syntax highlighting with orange keywords and mild white functions
+" Custom C/C++ syntax highlighting with orange keywords and functions
+" ========== Custom C/C++ syntax highlighting with orange keywords and functions ==========
 augroup CustomCHighlighting
     autocmd!
-    " Highlight C keywords in orange
+    " Set default text color to darker gray
+    " autocmd FileType c,cpp,lua,javascript,javascriptreact,typescript,typescriptreact highlight Normal ctermfg=240 guifg=#585858
+    autocmd FileType c,cpp,lua,javascript,javascriptreact,typescript,typescriptreact highlight Normal ctermfg=245 guifg=#8a8a8a
+    
+    " Comments in a muted light blue color (changed from green)
+    autocmd FileType c,cpp,lua,javascript,javascriptreact,typescript,typescriptreact highlight Comment ctermfg=67 guifg=#5f87af
+    
+    " Highlight keywords in orange
     autocmd FileType c,cpp highlight cStatement ctermfg=214 guifg=orange
     autocmd FileType c,cpp highlight cLabel ctermfg=214 guifg=orange
     autocmd FileType c,cpp highlight cConditional ctermfg=214 guifg=orange
@@ -72,13 +80,49 @@ augroup CustomCHighlighting
     autocmd FileType c,cpp highlight cStructure ctermfg=214 guifg=orange
     autocmd FileType c,cpp highlight cOperator ctermfg=214 guifg=orange
     autocmd FileType c,cpp highlight cPreCondit ctermfg=214 guifg=orange
-    autocmd FileType c,cpp highlight cConstant ctermfg=214 guifg=orange
     
-    " Highlight functions in mild white
-    autocmd FileType c,cpp highlight cFunction ctermfg=252 guifg=#d0d0d0
-    autocmd FileType c,cpp highlight Function ctermfg=252 guifg=#d0d0d0
+    " Lua syntax highlighting - with no bold for keywords
+    autocmd FileType lua highlight luaStatement ctermfg=214 guifg=orange gui=NONE cterm=NONE
+    autocmd FileType lua highlight luaRepeat ctermfg=214 guifg=orange gui=NONE cterm=NONE
+    autocmd FileType lua highlight luaCondStart ctermfg=214 guifg=orange gui=NONE cterm=NONE
+    autocmd FileType lua highlight luaCondElseif ctermfg=214 guifg=orange gui=NONE cterm=NONE
+    autocmd FileType lua highlight luaCondEnd ctermfg=214 guifg=orange gui=NONE cterm=NONE
+    autocmd FileType lua highlight luaFunction ctermfg=214 guifg=orange gui=NONE cterm=NONE
     
-    " Make sure the highlighting persists
+    " JavaScript/React syntax highlighting
+    autocmd FileType javascript,javascriptreact,typescript,typescriptreact highlight jsStatement ctermfg=214 guifg=orange
+    autocmd FileType javascript,javascriptreact,typescript,typescriptreact highlight jsConditional ctermfg=214 guifg=orange
+    autocmd FileType javascript,javascriptreact,typescript,typescriptreact highlight jsRepeat ctermfg=214 guifg=orange
+    autocmd FileType javascript,javascriptreact,typescript,typescriptreact highlight jsLabel ctermfg=214 guifg=orange
+    autocmd FileType javascript,javascriptreact,typescript,typescriptreact highlight jsKeyword ctermfg=214 guifg=orange
+    autocmd FileType javascript,javascriptreact,typescript,typescriptreact highlight jsClass ctermfg=214 guifg=orange
+    autocmd FileType javascript,javascriptreact,typescript,typescriptreact highlight jsStorageClass ctermfg=214 guifg=orange
+    autocmd FileType javascript,javascriptreact,typescript,typescriptreact highlight jsClassKeyword ctermfg=214 guifg=orange
+    autocmd FileType javascript,javascriptreact,typescript,typescriptreact highlight jsImport ctermfg=214 guifg=orange
+    autocmd FileType javascript,javascriptreact,typescript,typescriptreact highlight jsFrom ctermfg=214 guifg=orange
+    autocmd FileType javascript,javascriptreact,typescript,typescriptreact highlight jsExport ctermfg=214 guifg=orange
+    
+    " Highlight constants and variables in white
+    autocmd FileType c,cpp,lua,javascript,javascriptreact,typescript,typescriptreact highlight Constant ctermfg=15 guifg=#ffffff
+    autocmd FileType c,cpp,lua,javascript,javascriptreact,typescript,typescriptreact highlight cConstant ctermfg=15 guifg=#ffffff
+    autocmd FileType c,cpp,lua,javascript,javascriptreact,typescript,typescriptreact highlight Identifier ctermfg=15 guifg=#ffffff
+    
+    " Highlight functions in bright white (no bold) to make them stand out
+    autocmd FileType c,cpp syntax match cCustomFunc /\w\+\s*(/me=e-1,he=e-1
+    autocmd FileType c,cpp highlight def link cCustomFunc Function
+    autocmd FileType c,cpp,lua,javascript,javascriptreact,typescript,typescriptreact highlight Function ctermfg=231 guifg=#ffffff gui=NONE cterm=NONE
+    
+    " Custom function matching for JavaScript/TypeScript/React
+    autocmd FileType javascript,javascriptreact,typescript,typescriptreact syntax match jsCustomFunc /\w\+\s*(/me=e-1,he=e-1
+    autocmd FileType javascript,javascriptreact,typescript,typescriptreact highlight def link jsCustomFunc Function
+    
+    " Custom function matching for Lua
+    autocmd FileType lua syntax match luaCustomFunc /\w\+\s*(/me=e-1,he=e-1
+    autocmd FileType lua highlight def link luaCustomFunc Function
+
+    " Make sure the highlighting persists with any colorscheme
+    autocmd ColorScheme * highlight Normal ctermfg=240 guifg=#585858
+    autocmd ColorScheme * highlight Comment ctermfg=67 guifg=#5f87af
     autocmd ColorScheme * highlight cStatement ctermfg=214 guifg=orange
     autocmd ColorScheme * highlight cLabel ctermfg=214 guifg=orange
     autocmd ColorScheme * highlight cConditional ctermfg=214 guifg=orange
@@ -88,9 +132,29 @@ augroup CustomCHighlighting
     autocmd ColorScheme * highlight cStructure ctermfg=214 guifg=orange
     autocmd ColorScheme * highlight cOperator ctermfg=214 guifg=orange
     autocmd ColorScheme * highlight cPreCondit ctermfg=214 guifg=orange
-    autocmd ColorScheme * highlight cConstant ctermfg=214 guifg=orange
-    autocmd ColorScheme * highlight cFunction ctermfg=252 guifg=#d0d0d0
-    autocmd ColorScheme * highlight Function ctermfg=252 guifg=#d0d0d0
+    autocmd ColorScheme * highlight cConstant ctermfg=15 guifg=#ffffff
+    autocmd ColorScheme * highlight Constant ctermfg=15 guifg=#ffffff
+    autocmd ColorScheme * highlight Identifier ctermfg=15 guifg=#ffffff
+    autocmd ColorScheme * highlight Function ctermfg=231 guifg=#ffffff gui=NONE cterm=NONE
+    
+    " JavaScript/Lua specific highlights
+    autocmd ColorScheme * highlight luaStatement ctermfg=214 guifg=orange gui=NONE cterm=NONE
+    autocmd ColorScheme * highlight luaRepeat ctermfg=214 guifg=orange gui=NONE cterm=NONE
+    autocmd ColorScheme * highlight luaCondStart ctermfg=214 guifg=orange gui=NONE cterm=NONE
+    autocmd ColorScheme * highlight luaCondElseif ctermfg=214 guifg=orange gui=NONE cterm=NONE
+    autocmd ColorScheme * highlight luaCondEnd ctermfg=214 guifg=orange gui=NONE cterm=NONE
+    autocmd ColorScheme * highlight luaFunction ctermfg=214 guifg=orange gui=NONE cterm=NONE
+    autocmd ColorScheme * highlight jsStatement ctermfg=214 guifg=orange
+    autocmd ColorScheme * highlight jsConditional ctermfg=214 guifg=orange
+    autocmd ColorScheme * highlight jsRepeat ctermfg=214 guifg=orange
+    autocmd ColorScheme * highlight jsLabel ctermfg=214 guifg=orange
+    autocmd ColorScheme * highlight jsKeyword ctermfg=214 guifg=orange
+    autocmd ColorScheme * highlight jsClass ctermfg=214 guifg=orange
+    autocmd ColorScheme * highlight jsStorageClass ctermfg=214 guifg=orange
+    autocmd ColorScheme * highlight jsClassKeyword ctermfg=214 guifg=orange
+    autocmd ColorScheme * highlight jsImport ctermfg=214 guifg=orange
+    autocmd ColorScheme * highlight jsFrom ctermfg=214 guifg=orange
+    autocmd ColorScheme * highlight jsExport ctermfg=214 guifg=orange
 augroup END
 
 " ========== Key Mappings ==========
@@ -169,35 +233,35 @@ autocmd FileType javascript,typescript,html,css setlocal tabstop=2 softtabstop=2
 
 " Plugin section (uncomment and add your plugins)
 " call plug#begin('~/.vim/plugged')
-" 
+"
 " " Navigation and search
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " Plug 'junegunn/fzf.vim'
-" 
+"
 " " Git integration
 " Plug 'tpope/vim-fugitive'
 " Plug 'airblade/vim-gitgutter'
-" 
+"
 " " Additional functionality
 " Plug 'tpope/vim-commentary'  " Commenting
 " Plug 'tpope/vim-surround'    " Surround text
-" 
+"
 " " Language support
 " Plug 'sheerun/vim-polyglot'  " Language pack
-" 
+"
 " " Colorscheme
-" Plug 'morhetz/gruvbox'       " Tsoding often uses gruvbox
-" 
+" Plug 'morhetz/gruvbox'       " Gruvbox theme
+"
 " call plug#end()
-" 
+"
 " " Plugin configurations
 " colorscheme gruvbox
-" 
+"
 " " FZF configurations
 " nnoremap <C-p> :Files<CR>
 " nnoremap <leader>b :Buffers<CR>
 " nnoremap <leader>g :Rg<CR>
-" 
+"
 " " Git configurations
 " nnoremap <leader>gs :Git<CR>
 " nnoremap <leader>gc :Git commit<CR>
