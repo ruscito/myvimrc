@@ -1,6 +1,3 @@
-" Tsoding-inspired .vimrc configuration
-" Based on Alexey Kutepov's (Tsoding) preferences
-
 " ========== Basic Setup ==========
 set nocompatible              " Use Vim settings, rather than Vi settings
 syntax on                     " Enable syntax highlighting
@@ -133,6 +130,9 @@ nnoremap <leader>hs :split<CR>
 " Quick save
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
+
+ " Explorer
+nnoremap <leader>e :Ex<CR>
 
 " ========== Programming Specific ==========
 " Auto close braces, brackets, etc.
