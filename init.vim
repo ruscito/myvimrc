@@ -257,28 +257,32 @@ endfunction
 
 " ========== Screen Set. ============
 highlight clear               " Clear all existing highlights
+
+" Force background and foreground colors
+highlight Normal ctermbg=NONE guibg=#2E2E2E ctermfg=NONE guifg=#DADADA
+
+" status line
 highlight StatusLine ctermfg=214 ctermbg=236 guifg=#ffa500 guibg=#303030
-" Enable syntax highlighting first
 syntax enable
 
-highlight Function     ctermfg=208 guifg=#FF5F00  " Deeper orange
-highlight Statement    ctermfg=208 guifg=#FFA500  " if, else, return
-highlight Conditional  ctermfg=208 guifg=#FFA500  " if, else if, switch
-highlight Repeat       ctermfg=208 guifg=#FFA500  " for, while, do
-highlight Label        ctermfg=208 guifg=#FFA500  " case, default
-highlight Operator     ctermfg=240 guifg=#FFA500  " +, -, *, /, =
-highlight Keyword      ctermfg=231 guifg=#FFA500  " language-specific keywords
-highlight Exception    ctermfg=208 guifg=#FFA500  " try, catch, throw
-highlight Include      ctermfg=208 guifg=#FFA500  " import, require
-highlight StorageClass ctermfg=208 guifg=#FFA500  " static, const, let
+highlight Function     ctermfg=208 guifg=#FF8700  " Deeper orange
+highlight Statement    ctermfg=208 guifg=#FF8700  " if, else, return
+highlight Conditional  ctermfg=208 guifg=#FF8700  " if, else if, switch
+highlight Repeat       ctermfg=208 guifg=#FF8700  " for, while, do
+highlight Label        ctermfg=208 guifg=#FF8700  " case, default
+highlight Operator     ctermfg=240 guifg=#585858  " +, -, *, /, =
+highlight Keyword      ctermfg=231 guifg=#FFFFFF  " language-specific keywords
+highlight Exception    ctermfg=208 guifg=#FF8700  " try, catch, throw
+highlight Include      ctermfg=208 guifg=#FF8700  " import, require
+highlight StorageClass ctermfg=208 guifg=#FF8700  " static, const, let
 highlight StorageClass ctermfg=111 guifg=#87CEEB  " Storage specifiers
-highlight Type       ctermfg=149 guifg=#98C379    " Data types
-highlight Structure  ctermfg=146 guifg=#56B6C2    " Struct/class defs
-highlight String       ctermfg=72  guifg=#9AC0CD  " string
-highlight Delimiter    ctermfg=240 guifg=#8A8A8A  " punctuation
-highlight LineNr       ctermfg=208 guifg=#FFA500  " punctuation
-highlight Comment      ctermfg=110 guifg=#88A088  " comment
-"highlight Normal       ctermfg=240 guifg=#CCCCCC  " Normal text
+highlight Type         ctermfg=149 guifg=#98C379  " Data types
+highlight Structure    ctermfg=146 guifg=#56B6C2  " Struct/class defs
+highlight String       ctermfg=72  guifg=#5FAFAF  " string
+highlight Delimiter    ctermfg=240 guifg=#585858  " punctuation
+highlight LineNr       ctermfg=208 guifg=#FF8700  " punctuation
+highlight Comment      ctermfg=110 guifg=#87AF87  " comment
+
 
 lua << EOF
 local term_win = nil
