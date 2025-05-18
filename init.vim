@@ -310,4 +310,5 @@ vim.keymap.set("t", "<C-q>", function()
         vim.api.nvim_set_current_win(original_win)
     end
 end, { noremap = true, silent = true })
+
 EOF
