@@ -61,6 +61,9 @@ set nowrap                    " Don't wrap lines
 set list                      " Show invisible characters
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Display tab characters and trailing spaces
 
+filetype plugin indent on
+
+
 " ========== Key Mappings ==========
 let mapleader = " "           " Space as leader key
 
@@ -145,6 +148,20 @@ autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 
 " Language-specific settings
+
+" Assembler filetypes
+autocmd BufRead,BufNewFile *.asm,*.s,*.S set filetype=asm
+" Assembler syntax highlighting (custom tweaks)
+augroup AsmSyntax
+  autocmd!
+  autocmd FileType asm highlight asmKeyword   ctermfg=208 guifg=#FF8700
+  autocmd FileType asm highlight asmRegister  ctermfg=111 guifg=#87CEEB
+  autocmd FileType asm highlight asmLabel     ctermfg=149 guifg=#98C379
+  autocmd FileType asm syntax keyword asmKeyword mov add sub inc dec push pop call ret jmp cmp je jne jg jl
+  autocmd FileType asm syntax keyword asmRegister eax ebx ecx edx esi edi esp ebp rax rbx rcx rdx rsi rdi rsp rbp
+  autocmd FileType asm syntax match asmLabel /^\s*[._A-Za-z][A-Za-z0-9_]*:/
+augroup END
+
 autocmd FileType python setlocal textwidth=79 tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 autocmd FileType javascript,typescript,html,css setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
